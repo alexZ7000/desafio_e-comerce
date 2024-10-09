@@ -5,7 +5,6 @@ import com.example.comerce.shared.helpers.external_interfaces.ExternalInterface.
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
