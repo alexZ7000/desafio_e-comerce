@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class OrderDTO {
+public final class OrderDTO {
 
     @NotNull(message = "Data do pedido não pode ser null")
     @FutureOrPresent(message = "Data do pedido deve ser no presente ou no futuro")
@@ -24,15 +24,15 @@ public class OrderDTO {
     private double total_price;
 
     public Order toEntity() {
-        Order order = new Order();
+        final Order order = new Order();
         order.setDate(this.date);
         order.setDiscount(this.discount);
         order.setDiscount(this.total_price);
         return order;
     }
 
-    public static OrderDTO toDTO(OrderDTO order) {
-        OrderDTO orderDTO = new OrderDTO();
+    public static OrderDTO toDTO(final OrderDTO order) {
+        final OrderDTO orderDTO = new OrderDTO();
         orderDTO.setDate(order.getDate());
         orderDTO.setDiscount(order.getDiscount());
         orderDTO.setTotal_price(order.getDiscount());

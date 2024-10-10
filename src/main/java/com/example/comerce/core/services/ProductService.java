@@ -11,29 +11,34 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ProductService {
+public final class ProductService {
+
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public Optional<Product> findById(UUID productId) {
+    public Optional<Product> findById(final UUID productId) {
         return productRepository.findById(productId);
     }
 
-    public Product save(ProductDTO productDTO) {
-        Product product = productDTO.toEntity();
+    public Product save(final ProductDTO productDTO) {
+        final Product product = productDTO.toEntity();
         return productRepository.save(product);
     }
 
-    public void delete(UUID productId) {
+    public void delete(final UUID productId) {
         productRepository.deleteById(productId);
     }
 
-    public Product update(UUID productId, ProductDTO productDTO) {
-        Product product = productDTO.toEntity();
+    public Product update(final UUID productId, final ProductDTO productDTO) {
+        final Product product = productDTO.toEntity();
         product.setProduct_id(productId);
         return productRepository.save(product);
     }

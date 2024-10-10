@@ -2,7 +2,7 @@ package com.example.comerce.shared.helpers.external_interfaces;
 
 import java.util.Map;
 
-class ExternalInterface {
+final class ExternalInterface {
     protected interface IRequest {
         Map<String, Object> getData();
     }
@@ -11,5 +11,4 @@ class ExternalInterface {
         int getStatusCode();
         Map<String, Object> getData();
     }
-
 }

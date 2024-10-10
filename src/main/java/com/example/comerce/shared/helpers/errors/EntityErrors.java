@@ -12,13 +12,13 @@ public class EntityErrors extends BaseError {
         }
     }
 
-    public static class EntityParameterTypeError extends EntityError {
+    public final static class EntityParameterTypeError extends EntityError {
         public EntityParameterTypeError(final String message) {
             super(message);
         }
     }
 
-    public static class EntityParameterError extends EntityError {
+    public final static class EntityParameterError extends EntityError {
         public EntityParameterError(final String message) {
             super(message);
         }

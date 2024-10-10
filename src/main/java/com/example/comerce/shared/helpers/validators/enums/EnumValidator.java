@@ -1,6 +1,6 @@
 package com.example.comerce.shared.helpers.validators.enums;
 
-public class EnumValidator {
+public final class EnumValidator {
 
     public static boolean validateEnum(Enum<?>[] enumValues, String value) {
         for (Enum<?> enumValue : enumValues) {

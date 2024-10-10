@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class HttpModels {
+public final class HttpModels {
 
-    public static class HttpRequest implements IRequest {
+    public final static class HttpRequest implements IRequest {
         private final Map<String, Object> body;
         private final Map<String, Object> headers;
         private final Map<String, Object> queryParams;
@@ -60,7 +60,7 @@ public class HttpModels {
     }
 
     @Getter
-    public static class HttpResponse implements IResponse {
+    public final static class HttpResponse implements IResponse {
         private final HttpStatus statusCode;
         private final Map<String, Object> body;
         private final Map<String, Object> headers;

@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class ProductCategoryId {
+public final class ProductCategoryId {
     @Column(insertable = false, updatable = false)
     private UUID product_id;
 

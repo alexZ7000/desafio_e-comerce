@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ProductDTO {
+public final class ProductDTO {
 
     @NotBlank(message = "O nome do produto não pode estar em branco")
     private String name;
@@ -30,7 +30,7 @@ public class ProductDTO {
     private double price;
 
     public Product toEntity() {
-        Product product = new Product();
+        final Product product = new Product();
         product.setName(this.name);
         product.setStock_quantity(this.stock_quantity);
         product.setCost_price(this.cost_price);
@@ -40,8 +40,8 @@ public class ProductDTO {
         return product;
     }
 
-    public static ProductDTO toDTO(ProductDTO product) {
-        ProductDTO productDTO = new ProductDTO();
+    public static ProductDTO toDTO(final ProductDTO product) {
+        final ProductDTO productDTO = new ProductDTO();
         productDTO.setName(product.getName());
         productDTO.setStock_quantity(product.getStock_quantity());
         productDTO.setCost_price(product.getCost_price());

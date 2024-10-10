@@ -2,7 +2,6 @@ package com.example.comerce.core.controller;
 
 import com.example.comerce.core.dto.CategoryDTO;
 import com.example.comerce.core.entities.Category;
-import com.example.comerce.core.entities.Product;
 import com.example.comerce.core.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,37 +13,42 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/category")
-public class CategoryController {
+public final class CategoryController {
+
+    private final CategoryService categoryService;
+
     @Autowired
-    private CategoryService categoryService;
+    public CategoryController(final CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
-        List<Category> categories = categoryService.findAll();
+        final List<Category> categories = categoryService.findAll();
         return ResponseEntity.ok(categories);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable UUID id) {
-        Optional<Category> category = Optional.ofNullable(categoryService.findById(id));
+    public ResponseEntity<Category> getCategoryById(@PathVariable final UUID id) {
+        final Optional<Category> category = Optional.ofNullable(categoryService.findById(id));
         return category.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody CategoryDTO categoryDTO) {
-        Category savedCategory = categoryService.save(categoryDTO.toEntity());
+    public ResponseEntity<Category> createCategory(@RequestBody final CategoryDTO categoryDTO) {
+        final Category savedCategory = categoryService.save(categoryDTO.toEntity());
         return ResponseEntity.ok(savedCategory);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable final UUID id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable UUID id, @RequestBody CategoryDTO categoryDTO) {
-        Category updatedCategory = categoryService.update(id, categoryDTO.toEntity());
+    public ResponseEntity<Category> updateCategory(@PathVariable final UUID id, @RequestBody final CategoryDTO categoryDTO) {
+        final Category updatedCategory = categoryService.update(id, categoryDTO.toEntity());
         return ResponseEntity.ok(updatedCategory);
     }
 }

@@ -11,7 +11,7 @@ import java.util.UUID;
 @Table(name = "category")
 @Getter
 @Setter
-public class Category {
+public final class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

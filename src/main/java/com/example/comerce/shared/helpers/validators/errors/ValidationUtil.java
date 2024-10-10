@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ValidationUtil {
-    public static <T> Map<String, String> validateAndGetViolations(Validator validator, T entity) {
+public final class ValidationUtil {
+    public static <T> Map<String, String> validateAndGetViolations(final Validator validator, final T entity) {
         final Set<ConstraintViolation<T>> violations = validator.validate(entity);
 
         if (violations.isEmpty()) {

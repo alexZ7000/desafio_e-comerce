@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "address")
 @Getter
 @Setter
-public class Address {
+public final class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -7,19 +7,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategoryDTO {
+public final class CategoryDTO {
 
     @Size(min = 10, max = 255, message = "A descrição da categoria deve ter entre 10 e 255 caracteres")
     private String description;
 
     public Category toEntity() {
-        Category category = new Category();
+        final Category category = new Category();
         category.setDescription(this.description);
         return category;
     }
 
-    public static CategoryDTO toDTO(CategoryDTO category) {
-        CategoryDTO categoryDTO = new CategoryDTO();
+    public static CategoryDTO toDTO(final CategoryDTO category) {
+        final CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setDescription(category.getDescription());
         return categoryDTO;
     }

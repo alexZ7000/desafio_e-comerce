@@ -12,7 +12,7 @@ import java.util.UUID;
 @Table(name = "order_items")
 @Getter
 @Setter
-public class OrderItem {
+public final class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

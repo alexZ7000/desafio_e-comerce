@@ -2,7 +2,7 @@ package com.example.comerce.shared.helpers.validators.entities;
 
 import java.util.UUID;
 
-public class UUIDValidator {
+public final class UUIDValidator {
     public static boolean validateUUID(final String campo, final String value) {
         try {
             if (value.length() == 36){

@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class EnvConfigListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
+public final class EnvConfigListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(EnvConfigListener.class);
 

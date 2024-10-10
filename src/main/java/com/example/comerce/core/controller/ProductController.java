@@ -13,43 +13,42 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/products")
-public class ProductController {
+public final class ProductController {
+
+    private final ProductService productService;
+
     @Autowired
-    private ProductService productService;
+    public ProductController(final ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.findAll();
+        final List<Product> products = productService.findAll();
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable UUID id) {
-        Optional<Product> product = productService.findById(id);
-        return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/products/{category}/{id}")
-    public ResponseEntity<Product> getProductByCategoryAndId(@PathVariable String category, @PathVariable UUID id) {
-        Optional<Product> product = productService.findById(id);
+    public ResponseEntity<Product> getProductById(@PathVariable final UUID id) {
+        final Optional<Product> product = productService.findById(id);
         return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
-        Product savedProduct = productService.save(productDTO);
+    public ResponseEntity<Product> createProduct(@RequestBody final ProductDTO productDTO) {
+        final Product savedProduct = productService.save(productDTO);
         return ResponseEntity.ok(savedProduct);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable final UUID id) {
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable UUID id, @RequestBody ProductDTO productDTO) {
-        Product updatedProduct = productService.update(id, productDTO);
+    public ResponseEntity<Product> updateProduct(@PathVariable final UUID id, @RequestBody final ProductDTO productDTO) {
+        final Product updatedProduct = productService.update(id, productDTO);
         return ResponseEntity.ok(updatedProduct);
     }
 }

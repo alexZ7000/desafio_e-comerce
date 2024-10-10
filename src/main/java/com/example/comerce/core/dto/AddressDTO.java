@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddressDTO {
+public final class AddressDTO {
     @NotBlank(message = "CEP não pode estar em branco")
     private String postal_code;
 
@@ -30,7 +30,7 @@ public class AddressDTO {
     private String state;
 
     public Address toEntity() {
-        Address address = new Address();
+        final Address address = new Address();
         address.setPostal_code(this.postal_code);
         address.setStreet(this.street);
         address.setNumber(this.number);
@@ -41,8 +41,8 @@ public class AddressDTO {
         return address;
     }
 
-    public static AddressDTO toDTO(Address address) {
-        AddressDTO addressDTO = new AddressDTO();
+    public static AddressDTO toDTO(final Address address) {
+        final AddressDTO addressDTO = new AddressDTO();
         addressDTO.setPostal_code(address.getPostal_code());
         addressDTO.setStreet(address.getStreet());
         addressDTO.setNumber(address.getNumber());
