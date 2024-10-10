@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -24,4 +25,7 @@ public class Category {
     @Column
     @Size(min = 10, max = 255, message = "A descrição da categoria deve ter entre 10 e 255 caracteres")
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products;
 }

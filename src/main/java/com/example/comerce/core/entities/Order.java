@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,6 +22,10 @@ public class Order {
     @NotNull(message = "Order ID não pode ser null")
     private UUID order_id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @Column(nullable = false)
     @NotNull(message = "Data do pedido não pode ser null")
     @FutureOrPresent(message = "Data do pedido deve ser no presente ou no futuro")
@@ -33,4 +38,7 @@ public class Order {
     @Column(nullable = false)
     @Positive(message = "O valor total deve ser um valor positivo")
     private double total_price;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
 }
