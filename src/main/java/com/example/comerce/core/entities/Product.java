@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -19,15 +20,24 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id", nullable = false, unique = true, updatable = false, length = 36)
-    @NotNull(message = "Product ID não pode ser null")
     private UUID product_id;
 
     @Column(nullable = false)
-    @NotNull(message = "O nome do produto não pode ser null")
     private String name;
 
     @Column(nullable = false)
-    @Positive(message = "O preço do produto deve ser positivo")
+    private int stock_quantity;
+
+    @Column(nullable = false)
+    private double cost_price;
+
+    @Column(nullable = false)
+    private double sell_price;
+
+    @Column(nullable = false)
+    private Date created_at;
+
+    @Column(nullable = false)
     private double price;
 
     @ManyToMany

@@ -20,6 +20,9 @@ public class AddressDTO {
     @NotBlank(message = "Bairro não pode estar em branco")
     private String neighborhood;
 
+    @NotBlank(message = "Complemento não pode estar em branco")
+    private String complement;
+
     @NotBlank(message = "Cidade não pode estar em branco")
     private String city;
 
@@ -31,6 +34,7 @@ public class AddressDTO {
         address.setPostal_code(this.postal_code);
         address.setStreet(this.street);
         address.setNumber(this.number);
+        address.setComplement(this.complement);
         address.setNeighborhood(this.neighborhood);
         address.setCity(this.city);
         address.setState(this.state);
@@ -42,6 +46,7 @@ public class AddressDTO {
         addressDTO.setPostal_code(address.getPostal_code());
         addressDTO.setStreet(address.getStreet());
         addressDTO.setNumber(address.getNumber());
+        addressDTO.setComplement(address.getComplement());
         addressDTO.setNeighborhood(address.getNeighborhood());
         addressDTO.setCity(address.getCity());
         addressDTO.setState(address.getState());
