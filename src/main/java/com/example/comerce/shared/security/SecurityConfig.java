@@ -14,12 +14,12 @@ public class SecurityConfig {
     @Autowired
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // Desabilitar CSRF, caso você não precise (API REST, por exemplo)
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/users").permitAll() // Liberando o endpoint /users
-                        .anyRequest().permitAll() // Todas as outras requisições precisam de autenticação
+                        .requestMatchers("/api/users").permitAll()
+                        .anyRequest().permitAll()
                 );
 
-        return http.build(); // Retorna o SecurityFilterChain configurado
+        return http.build();
     }
 }

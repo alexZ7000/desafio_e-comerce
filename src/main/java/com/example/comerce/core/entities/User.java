@@ -29,7 +29,6 @@ public class User {
     private String cpf;
 
     @Column(length = 100, nullable = false, unique = true)
-    @Email(message = "E-mail inválido")
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)

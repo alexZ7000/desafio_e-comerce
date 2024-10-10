@@ -1,4 +1,4 @@
-package com.example.comerce.core.dtos;
+package com.example.comerce.core.dto;
 
 import com.example.comerce.core.entities.User;
 import jakarta.validation.constraints.Email;

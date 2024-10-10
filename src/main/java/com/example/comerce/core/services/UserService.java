@@ -1,6 +1,6 @@
 package com.example.comerce.core.services;
 
-import com.example.comerce.core.dtos.UserDTO;
+import com.example.comerce.core.dto.UserDTO;
 import com.example.comerce.core.entities.User;
 import com.example.comerce.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

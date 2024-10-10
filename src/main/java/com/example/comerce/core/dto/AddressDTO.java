@@ -1,4 +1,4 @@
-package com.example.comerce.core.dtos;
+package com.example.comerce.core.dto;
 
 import com.example.comerce.core.entities.Address;
 import jakarta.validation.constraints.NotBlank;
