@@ -35,7 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new JWTAuthenticationFilter(jwtService, (CustomUserDetailsService) userDetailsService), UsernamePasswordAuthenticationFilter.class); // Adicionando o filtro
+                .addFilterBefore(new JWTAuthenticationFilter(jwtService, (CustomUserDetailsService) userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

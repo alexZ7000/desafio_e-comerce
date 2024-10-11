@@ -40,7 +40,7 @@ public final class ProductDTO {
         return product;
     }
 
-    public static ProductDTO toDTO(final ProductDTO product) {
+    public static ProductDTO toDTO(final Product product) {
         final ProductDTO productDTO = new ProductDTO();
         productDTO.setName(product.getName());
         productDTO.setStock_quantity(product.getStock_quantity());

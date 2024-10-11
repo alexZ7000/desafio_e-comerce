@@ -31,8 +31,12 @@ public final class CategoryService {
     }
 
     public Category update(final UUID categoryId, final Category category) {
-        category.setCategory_id(categoryId);
-        return categoryRepository.save(category);
+        final Category existingCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category Not Found"));
+
+        existingCategory.setDescription(category.getDescription());
+
+        return categoryRepository.save(existingCategory);
     }
 
     public Category findById(final UUID categoryId) {

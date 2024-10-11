@@ -46,8 +46,8 @@ public final class UserService {
 
     public User save(final UserDTO userDTO) {
         final User user = userDTO.toEntity();
-        final String password = passwordEncoder.encode(user.getPassword());
-        user.setPassword(password);
+        final String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 
@@ -56,15 +56,16 @@ public final class UserService {
     }
 
     public LoginResponse login(final String email, final String senha) throws Exception {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new Exception("User not found"));
+
         final Authentication autenticacao = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, senha));
 
         SecurityContextHolder.getContext().setAuthentication(autenticacao);
         final String token = "Bearer " + jwtService.generateToken(email);
 
-        final User user = userRepository.findByEmail(email).orElseThrow(() -> new Exception("User not found"));
-
         return new LoginResponse(token, user);
     }
+
 
 }

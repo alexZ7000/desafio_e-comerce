@@ -27,15 +27,15 @@ public final class OrderDTO {
         final Order order = new Order();
         order.setDate(this.date);
         order.setDiscount(this.discount);
-        order.setDiscount(this.total_price);
+        order.setTotal_price(this.total_price);
         return order;
     }
 
-    public static OrderDTO toDTO(final OrderDTO order) {
+    public static OrderDTO toDTO(Order order) {
         final OrderDTO orderDTO = new OrderDTO();
         orderDTO.setDate(order.getDate());
         orderDTO.setDiscount(order.getDiscount());
-        orderDTO.setTotal_price(order.getDiscount());
+        orderDTO.setTotal_price(order.getTotal_price());
         return orderDTO;
     }
 }

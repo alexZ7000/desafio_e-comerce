@@ -18,7 +18,7 @@ public final class CategoryDTO {
         return category;
     }
 
-    public static CategoryDTO toDTO(final CategoryDTO category) {
+    public static CategoryDTO toDTO(final Category category) {
         final CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setDescription(category.getDescription());
         return categoryDTO;

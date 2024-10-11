@@ -3,6 +3,7 @@ package com.example.comerce.core.services;
 import com.example.comerce.core.dto.OrderDTO;
 import com.example.comerce.core.entities.Order;
 import com.example.comerce.core.repository.OrderRepository;
+import com.example.comerce.core.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +39,13 @@ public final class OrderService {
     }
 
     public Order update(final UUID orderId, final OrderDTO orderDTO) {
-        final Order order = orderDTO.toEntity();
-        order.setOrder_id(orderId);
-        return orderRepository.save(order);
+        final Order existingOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order Not Found"));
+
+        existingOrder.setTotal_price(orderDTO.getTotal_price());
+        existingOrder.setDate(orderDTO.getDate());
+        existingOrder.setDiscount(orderDTO.getDiscount());
+
+        return orderRepository.save(existingOrder);
     }
 }

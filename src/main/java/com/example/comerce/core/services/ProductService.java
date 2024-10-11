@@ -38,8 +38,17 @@ public final class ProductService {
     }
 
     public Product update(final UUID productId, final ProductDTO productDTO) {
-        final Product product = productDTO.toEntity();
-        product.setProduct_id(productId);
-        return productRepository.save(product);
+        final Product existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        existingProduct.setName(productDTO.getName());
+        existingProduct.setStock_quantity(productDTO.getStock_quantity());
+        existingProduct.setCost_price(productDTO.getCost_price());
+        existingProduct.setSell_price(productDTO.getSell_price());
+        existingProduct.setCreated_at(productDTO.getCreated_at());
+        existingProduct.setPrice(productDTO.getPrice());
+
+        return productRepository.save(existingProduct);
     }
+
 }
