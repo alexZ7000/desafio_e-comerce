@@ -7,6 +7,7 @@ import com.example.comerce.core.entities.LoginResponse;
 import com.example.comerce.core.entities.User;
 import com.example.comerce.core.repository.UserRepository;
 import com.example.comerce.shared.security.JWTService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -47,9 +48,11 @@ final class UserServiceTest {
     private User user;
     private UUID userId;
 
+    private AutoCloseable closeable;
+
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
 
         userId = UUID.randomUUID();
         userDTO = new UserDTO();
@@ -79,6 +82,18 @@ final class UserServiceTest {
         user.setUser_id(userId);
     }
 
+    @AfterEach
+    public void tearDown() {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            }
+            catch (Exception e) {
+                System.err.println("Erro ao fechar os recursos: " + e.getMessage());
+            }
+        }
+    }
+
     @Test
     public void testFindById_Success() {
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
@@ -100,13 +115,18 @@ final class UserServiceTest {
 
     @Test
     public void testSaveUser() {
-        // Não testa a senha, pois a senha é criptografada no método save
+        String encodedPassword = "encodedPassword123";
+        when(passwordEncoder.encode(userDTO.getPassword())).thenReturn(encodedPassword);
+
+        user.setPassword(encodedPassword);
         when(userRepository.save(any(User.class))).thenReturn(user);
 
         User savedUser = userService.save(userDTO);
 
         assertNotNull(savedUser, "Não é possível salvar dados vazios");
         assertEquals(user.getUser_id(), savedUser.getUser_id());
+        assertEquals(encodedPassword, savedUser.getPassword(), "A senha não foi codificada corretamente");
+        verify(passwordEncoder).encode(userDTO.getPassword());
     }
 
     @Test

@@ -25,8 +25,9 @@ final class OrderTest {
 
     @BeforeEach
     public void setUp() {
-        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (final ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
 
         globalOrder.setDate(new Date());
         globalOrder.setDiscount(100.00);

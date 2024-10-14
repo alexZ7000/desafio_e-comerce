@@ -3,6 +3,7 @@ package com.example.comerce.core.services;
 import com.example.comerce.core.dto.ProductDTO;
 import com.example.comerce.core.entities.Product;
 import com.example.comerce.core.repository.ProductRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,9 +31,11 @@ final class ProductServiceTest {
     private Product product = new Product();
     private final UUID productId = UUID.randomUUID();
 
+    private AutoCloseable closeable;
+
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
 
         productDTO.setName("Laptop");
         productDTO.setStock_quantity(10);
@@ -43,6 +46,11 @@ final class ProductServiceTest {
 
         product = productDTO.toEntity();
         product.setProduct_id(productId);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        if (closeable != null) closeable.close();
     }
 
     @Test

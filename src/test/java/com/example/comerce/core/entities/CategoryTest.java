@@ -23,8 +23,9 @@ final class CategoryTest {
 
     @BeforeEach
     public void setUp() {
-        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (final ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
 
         globalCategory.setDescription("Eletrônicos e Gadgets");
     }

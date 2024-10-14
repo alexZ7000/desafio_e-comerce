@@ -20,8 +20,9 @@ final class AddressTest {
 
     @BeforeEach
     public void setUp() {
-        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (final ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
 
         globalAddress.setPostal_code("12345-678");
         globalAddress.setStreet("Rua das Flores");

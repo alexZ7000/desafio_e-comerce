@@ -3,6 +3,7 @@ package com.example.comerce.core.services;
 import com.example.comerce.core.dto.OrderDTO;
 import com.example.comerce.core.entities.Order;
 import com.example.comerce.core.repository.OrderRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,9 +31,11 @@ final class OrderServiceTest {
     private Order order = new Order();
     private final UUID orderId = UUID.randomUUID();
 
+    private AutoCloseable closeable;
+
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
 
         orderDTO.setDate(new Date());
         orderDTO.setDiscount(100.00);
@@ -40,6 +43,18 @@ final class OrderServiceTest {
 
         order = orderDTO.toEntity();
         order.setOrder_id(orderId);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            }
+            catch (Exception e) {
+                System.err.println("Erro ao fechar os recursos: " + e.getMessage());
+            }
+        }
     }
 
     @Test

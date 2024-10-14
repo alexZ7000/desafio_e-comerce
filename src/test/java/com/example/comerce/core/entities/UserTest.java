@@ -25,8 +25,9 @@ final class UserTest {
 
     @BeforeEach
     public void setUp() {
-        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (final ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
 
         globalUser.setName("Alessandro Lima");
         globalUser.setEmail("alessandro@email.com");

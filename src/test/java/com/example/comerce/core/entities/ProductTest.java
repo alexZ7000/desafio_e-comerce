@@ -24,8 +24,9 @@ final class ProductTest {
 
     @BeforeEach
     public void setUp() {
-        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (final ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
 
         globalProduct.setName("Laptop");
         globalProduct.setStock_quantity(10);

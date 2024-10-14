@@ -3,6 +3,7 @@ package com.example.comerce.core.services;
 import com.example.comerce.core.dto.CategoryDTO;
 import com.example.comerce.core.entities.Category;
 import com.example.comerce.core.repository.CategoryRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -27,14 +28,28 @@ final class CategoryServiceTest {
     private Category category = new Category();
     private final UUID categoryId = UUID.randomUUID();
 
+    private AutoCloseable closeable;
+
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
 
         categoryDTO.setDescription("Category description");
 
         category = categoryDTO.toEntity();
         category.setCategory_id(categoryId);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            }
+            catch (Exception e) {
+                System.err.println("Erro ao fechar os recursos: " + e.getMessage());
+            }
+        }
     }
 
     @Test
