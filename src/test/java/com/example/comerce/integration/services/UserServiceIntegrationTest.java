@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional // Garante que cada teste seja executado em uma transação que será revertida
-public class UserServiceIntegrationTest {
+class UserServiceIntegrationTest {
 
     @Autowired
     private UserService userService;
@@ -29,28 +29,29 @@ public class UserServiceIntegrationTest {
     private UUID userId;
 
     @BeforeEach
-    public void setUp() {
-        User user = new User();
+    public final void setUp() {
+        final User user = new User();
         user.setName("Alessandro Lima");
         user.setEmail("alessandro@email.com");
         user.setCpf("12345678901");
         user.setTelephone("12345678901");
         user.setPassword("senha123");
+
         userId = userRepository.save(user).getUser_id();
     }
 
     @Test
-    public void testFindById() {
-        Optional<User> foundUser = userService.findById(userId);
+    public final void testFindById() {
+        final Optional<User> foundUser = userService.findById(userId);
 
         assertTrue(foundUser.isPresent());
         assertEquals(userId, foundUser.get().getUser_id());
     }
 
     @Test
-    public void testDeleteUser() {
+    public final void testDeleteUser() {
         userService.delete(userId);
-        Optional<User> foundUser = userService.findById(userId);
+        final Optional<User> foundUser = userService.findById(userId);
 
         assertFalse(foundUser.isPresent());
     }
