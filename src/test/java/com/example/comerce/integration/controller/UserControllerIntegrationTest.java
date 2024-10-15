@@ -1,6 +1,7 @@
 package com.example.comerce.integration.controller;
 
 import com.example.comerce.core.dto.AddressDTO;
+import com.example.comerce.core.dto.OrderDTO;
 import com.example.comerce.core.dto.UserDTO;
 import com.example.comerce.core.entities.User;
 import com.example.comerce.core.services.UserService;
@@ -17,9 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Collections;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -105,6 +104,12 @@ public class UserControllerIntegrationTest {
         address.setCity("Cidade Exemplo");
         address.setState("Estado Exemplo");
         userDTO.setAddress(address);
+
+        final OrderDTO order = new OrderDTO();
+        order.setDate(new Date());
+        order.setDiscount(10.0);
+        order.setTotal_price(100.0);
+        userDTO.setOrders(List.of(order));
 
         final User user = userDTO.toEntity();
         user.setUser_id(UUID.randomUUID());
