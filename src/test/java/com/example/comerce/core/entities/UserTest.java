@@ -137,9 +137,9 @@ final class UserTest {
     @Test
     public void testInvalidCpf() {
         // Teste 1: CPF em branco
-        globalUser.setCpf("");
+        globalUser.setCpf("           ");
         Map<String, String> violationMessages = ValidationUtil.validateAndGetViolations(validator, globalUser);
-        assertEquals("CPF deve ter 11 caracteres", violationMessages.get("cpf"));
+        assertEquals("CPF não pode estar em branco", violationMessages.get("cpf"));
 
         // Teste 2: CPF inválido
         globalUser.setCpf("1234567890");
@@ -150,12 +150,12 @@ final class UserTest {
     @Test
     public void testInvalidTelephone() {
         // Teste 1: Telefone em branco
-        globalUser.setTelephone("");
+        globalUser.setTelephone("           ");
         Map<String, String> violationMessages = ValidationUtil.validateAndGetViolations(validator, globalUser);
         assertEquals("Telefone não pode estar em branco", violationMessages.get("telephone"));
 
         // Teste 2: Telefone inválido
-        globalUser.setTelephone("1234567890");
+        globalUser.setTelephone("123456789");
         violationMessages = ValidationUtil.validateAndGetViolations(validator, globalUser);
         assertEquals("Telefone deve ter 11 caracteres", violationMessages.get("telephone"));
     }
@@ -163,9 +163,9 @@ final class UserTest {
     @Test
     public void testInvalidPassword() {
         // Teste 1: Senha em branco
-        globalUser.setPassword("");
+        globalUser.setPassword("      ");
         Map<String, String> violationMessages = ValidationUtil.validateAndGetViolations(validator, globalUser);
-        assertEquals("Senha deve ter no mínimo 6 e no máximo 255 caracteres", violationMessages.get("password"));
+        assertEquals("Senha não pode estar em branco", violationMessages.get("password"));
 
         // Teste 2: Senha com menos de 6 caracteres
         globalUser.setPassword("12345");

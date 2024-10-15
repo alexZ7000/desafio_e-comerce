@@ -23,6 +23,7 @@ public final class UserDTO {
     @Size(min = 11, max = 11, message = "Telefone deve ter 11 caracteres")
     private String telephone;
 
+    @NotBlank(message = "CPF não pode estar em branco")
     @Size(min = 11, max = 11, message = "CPF deve ter 11 caracteres")
     private String cpf;
 
@@ -30,6 +31,7 @@ public final class UserDTO {
     @Email(message = "E-mail inválido")
     private String email;
 
+    @NotBlank(message = "Senha não pode estar em branco")
     @Size(min = 6, max = 255, message = "Senha deve ter no mínimo 6 e no máximo 255 caracteres")
     private String password;
 
